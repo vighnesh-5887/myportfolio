@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fixed Progress Bar</title>
+  <style>
+    body {
+      display: flex;
+      gap: 30px;
+      padding: 50px;
+      background: #222;
+      color: #fff;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .skill {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: conic-gradient(#333 0% 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      font-family: sans-serif;
+      border: 5px solid #00f0ff;
+    }
+
+    .percentage {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00f0ff;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="skill" data-percentage="90">
+    <div class="percentage">0%</div>
+  </div>
+
+  <div class="skill" data-percentage="70">
+    <div class="percentage">0%</div>
+  </div>
+
+  <script>
+    const skills = document.querySelectorAll(".skill");
+
+    skills.forEach(skill => {
+      const value = parseInt(skill.getAttribute("data-percentage"));
+      let start = 0;
+      const percentageText = skill.querySelector(".percentage");
+      const circle = skill;
+
+      let progress = setInterval(() => {
+        start++;
+        percentageText.textContent = ${start}%;
+        circle.style.background = conic-gradient(#00f0ff 0% ${start}%, #333 ${start}% 100%);
+        if (start >= value) clearInterval(progress);
+      }, 20);
+    });
+  </script>
+
+</body>
+</html>
